@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS gomoku_db;
+
+CREATE USER IF NOT EXISTS testuser IDENTIFIED BY '9999';
+
+GRANT ALL ON gomoku_db.* TO testuser;
