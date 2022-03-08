@@ -1,9 +1,6 @@
 <?php
-
-require_once __DIR__ . '/functions.php';
-
-$dbh = connect_db();
-
+define("boardsize", 9);
+define("line", 8);
 session_start();
 $state = array(1, 1, 1, 1, 1, 1, 1, 1, 1);
 $gamestate = 0;
@@ -45,10 +42,10 @@ function showboard($state)
                 echo " " . $i . " ";
                 break;
             case 2:
-                echo " 〇";
+                echo "〇";
                 break;
             case 3:
-                echo " ●";
+                echo "●";
                 break;
             default:
                 break;
