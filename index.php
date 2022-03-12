@@ -35,7 +35,7 @@ if (!isset($_SESSION['state'])) {
         session_destroy();
     }
 }
-
+// session_destroy();
 ?>
 
 <!DOCTYPE html>
