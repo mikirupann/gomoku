@@ -19,26 +19,18 @@ if (!isset($_SESSION['state'])) {
     //showboard($_SESSION['state']);
     $gamestate = checkwinner($_SESSION['state'], $gamestate);
     if ($_SESSION['count'] % 2 == 0 and $gamestate == 0) {
-        //echo "<hr>";
         $msg = "〇 の番です!!<br>";
     } else if ($_SESSION['count'] % 2 == 1 and $gamestate == 0) {
-        //echo "<hr>";
         $msg = "● の番です!!<br>";
     }
     if ($gamestate == 1) {
         //echo "<hr>";
-        echo "〇 win!!";
+        $msg1 = "〇 win!!";
         session_destroy();
-        echo "<form action=index.php method=GET>
-<button>もう一度対戦!</button></form>";
-    } else if ($gamestate == 2) {
-        //echo "<hr>";
-        echo "● win!!";
+    } elseif ($gamestate == 2) {
+        $msg1 = "● win!!";
         session_destroy();
-        echo "<form action=index.php method=GET>
-      <button>もう一度対戦!</button></form>";
     } else if ($gamestate == 0 and $_SESSION['count'] == 225) {
-        //echo "<hr>";
         echo "引き分け";
         session_destroy();
     }
@@ -67,6 +59,18 @@ if (!isset($_SESSION['state'])) {
         <hr>
     <?php endif; ?>
     <?= $msg ?>
+    <?php if ($gamestate == 1) : ?>
+        <?= $msg1 ?>
+        <form action="index.php" method="GET">
+            <button>もう一度対戦!</button>
+        </form>
+    <?php endif; ?>
+    <?php if ($gamestate == 2) : ?>
+        <?= $msg1 ?>
+        <form action="index.php" method="GET">
+            <button>もう一度対戦!</button>
+        </form>
+    <?php endif; ?>
     <form action="gomoku_session.php" method="POST">
         <select name='cellnumber'>
             <div class="pulldown">

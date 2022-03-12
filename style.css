@@ -24,7 +24,10 @@ body {
     text-align: center;
     font-size: 50px;
     background-color: rgb(182, 120, 12);
+    text-align: center;
 }
 td {
     padding: 20px;
+    font-size: 60px;
+    margin: auto;
 }

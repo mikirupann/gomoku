@@ -1205,5 +1205,4 @@ function showboard($state)
             echo "</tr>";
         }
     }
-    // echo "<br>";
 }
