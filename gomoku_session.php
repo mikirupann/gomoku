@@ -7,6 +7,7 @@ if (isset($_POST['cellnumber'])) {
     $_SESSION['nowturn'] = 1;
     $_SESSION['count']++;
   } else if ($_SESSION['nowturn'] == 1 and $_SESSION['state'][$cellnumber] == 1) {
+   
     $_SESSION['state'][$cellnumber] = 3;
     $_SESSION['nowturn'] = 0;
     $_SESSION['count']++;

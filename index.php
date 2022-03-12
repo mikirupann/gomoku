@@ -5,97 +5,79 @@ require_once __DIR__ . '/functions.php';
 $dbh = connect_db();
 
 session_start();
-$state = array(1, 1, 1, 1, 1, 1, 1, 1, 1);
+$state = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 $gamestate = 0;
-function checkwinner($state, $gamestate)
-{
-    if (
-        $state[0] == 2 and $state[1] == 2 and $state[2] == 2 or
-        $state[3] == 2 and $state[4] == 2 and $state[5] == 2 or
-        $state[6] == 2 and $state[7] == 2 and $state[8] == 2 or
-        $state[0] == 2 and $state[3] == 2 and $state[6] == 2 or
-        $state[1] == 2 and $state[4] == 2 and $state[7] == 2 or
-        $state[2] == 2 and $state[5] == 2 and $state[8] == 2 or
-        $state[0] == 2 and $state[4] == 2 and $state[8] == 2 or
-        $state[2] == 2 and $state[4] == 2 and $state[6] == 2
-    ) {
-        return 1;
-    } elseif (
-        $state[0] == 3 and $state[1] == 3 and $state[2] == 3 or
-        $state[3] == 3 and $state[4] == 3 and $state[5] == 3 or
-        $state[6] == 3 and $state[7] == 3 and $state[8] == 3 or
-        $state[0] == 3 and $state[3] == 3 and $state[6] == 3 or
-        $state[1] == 3 and $state[4] == 3 and $state[7] == 3 or
-        $state[2] == 3 and $state[5] == 3 and $state[8] == 3 or
-        $state[0] == 3 and $state[4] == 3 and $state[8] == 3 or
-        $state[2] == 3 and $state[4] == 3 and $state[6] == 3
-    ) {
-        return 2;
-    } else {
-        return 0;
-    }
-}
-function showboard($state)
-{
-    for ($i = 0; $i < boardsize; $i++) {
-        switch ($state[$i]) {
-            case 0:
-                break;
-            case 1:
-                echo " " . $i . " ";
-                break;
-            case 2:
-                echo " 〇";
-                break;
-            case 3:
-                echo " ●";
-                break;
-            default:
-                break;
-        }
-        if ($i < 8 and ($i + 1) % 3 == 0) {
-            echo "<br>";
-        }
-    }
-    echo "<br>";
-}
+$msg = '';
 
 if (!isset($_SESSION['state'])) {
     $_SESSION['state'] = $state;
     $_SESSION['nowturn'] = 0;
     $_SESSION['count'] = 0;
-    showboard($state);
-} else if (isset($_SESSION['state'])) {
-    showboard($_SESSION['state']);
+    //showboard($state);
+} else {
+    $state = $_SESSION['state'];
+    //showboard($_SESSION['state']);
     $gamestate = checkwinner($_SESSION['state'], $gamestate);
     if ($_SESSION['count'] % 2 == 0 and $gamestate == 0) {
-        echo "〇 の番です!!<br>";
+        //echo "<hr>";
+        $msg = "〇 の番です!!<br>";
     } else if ($_SESSION['count'] % 2 == 1 and $gamestate == 0) {
-
-        echo "● の番です!!<br>";
+        //echo "<hr>";
+        $msg = "● の番です!!<br>";
     }
     if ($gamestate == 1) {
-        echo "〇 win";
+        //echo "<hr>";
+        echo "〇 win!!";
         session_destroy();
-        echo "<form action=sammoku.php method=GET>
+        echo "<form action=index.php method=GET>
 <button>もう一度対戦!</button></form>";
     } else if ($gamestate == 2) {
-        echo "● win";
+        //echo "<hr>";
+        echo "● win!!";
         session_destroy();
-        echo "<form action=sammoku.php method=GET>
+        echo "<form action=index.php method=GET>
       <button>もう一度対戦!</button></form>";
-    } else if ($gamestate == 0 and $_SESSION['count'] == 9) {
+    } else if ($gamestate == 0 and $_SESSION['count'] == 225) {
+        //echo "<hr>";
         echo "引き分け";
         session_destroy();
     }
 }
 
 ?>
-<form action="sammoku_session.php" method="POST">
-    <select name='cellnumber'>
-        <?php for ($i = 0; $i < boardsize; $i++) {
-            echo "<option value=" . $i . ">" . $i . "</option>";
-        } ?>
-    </select>
-    <button>打つ</button>
-</form>
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<?php include_once __DIR__ . '/_header.html' ?>
+
+<body>
+    <table border="1">
+        <tbody>
+            <?php
+            if (!isset($_SESSION['state'])) {
+                showboard($state);
+            } else {
+                showboard($state);
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php if (isset($_SESSION['state'])) :  ?>
+        <hr>
+    <?php endif; ?>
+    <?= $msg ?>
+    <form action="gomoku_session.php" method="POST">
+        <select name='cellnumber'>
+            <div class="pulldown">
+                <option hidden>エリア指定</option>
+                <?php for ($i = 0; $i < boardsize; $i++) : ?>
+                    <?php echo "<option value=" . $i . ">" . sprintf("%03d", $i) . "</option>" ?>
+                <?php endfor; ?>
+            </div>
+        </select>
+        <button>打つ</button>
+    </form>
+</body>
+
+</html>
