@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    <h1>伝説の五目</h1>
-    <h2>〜全米が泣いた〜</h2>
+    <h1>伝説の五目並べ</h1>
+    <h2>〜導かれし者たち〜</h2>
     <form action="index.php" method="POST">
         <button class="c-button">「伝説の勇者」になりたいものはここを押したまえ！！</button>
 </body>
