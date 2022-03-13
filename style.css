@@ -40,3 +40,9 @@ td {
 .pulldown {
     width: 100%;
 }
+select {
+    font-size: 30px;
+}
+.c-button {
+    font-size: 30px;
+}

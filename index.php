@@ -80,7 +80,7 @@ if (!isset($_SESSION['state'])) {
                 <?php endfor; ?>
             </div>
         </select>
-        <button>打つ</button>
+        <button class="c-button">打つ</button>
     </form>
 </body>
 
